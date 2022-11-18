@@ -16,11 +16,6 @@ function select(selector, parent = document) {
     return parent.querySelector(selector);
 }
 
-function sleep(duration) {
-    return new Promise(resolve => {
-        setTimeout(resolve, duration);
-    })
-} 
 
 const setAlarm = select('.alarm-set');
 const cancelAlarm = select('.alarm-cancel')
@@ -29,9 +24,6 @@ const displayTimer = select('.display-timer');
 const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]/;
 const userTimeWanted = select('.alarm-time');
 const background = select('body');
-
-
-
 
 let now = {};
 let nowYear = 0;
@@ -66,7 +58,6 @@ function getCurrentTime() {
 }
 
 onEvent('onload', currentTime, startClock());
-
 onEvent('click', setAlarm, setTimer);
 onEvent('click', cancelAlarm, cancelTimer);
 
@@ -90,6 +81,7 @@ function cancelTimer() {
     background.classList.remove('alarm');
     currentTime.classList.remove('alarm');
     cancelAlarm.classList.remove('alarm');
+    userTimeWanted.value = '';
 }
 
 function displayAlarm(alarmWanted) {
