@@ -27,8 +27,27 @@
             </div>
         </header>
         <main>
-            <div class="container">
-
+            <div class="container alarm-container">
+                <div class="row clock">
+                    <h2>This is the Current Time</h2>
+                </div>
+                <div class="row timer-set">
+                    <p>This shows the time has been set</p>
+                </div>
+                <div class="row form">
+                    <form>
+                        <label>Set Alarm</label>
+                        <input class="alarm-type" type="radio" name="alarm-type">
+                        <input class="alarm-type" type="radio" name="alarm-type">
+                        <label>Set Timer</label>
+                        <div class="form-input">
+                            <div><input type=text class="set-time" placeholder="00:00:00"></div>
+                            <div><input type=text class="set-duration" placeholder="30:00"></div>
+                            <div><input type="button" class="set-alarm" value="Set"></div>
+                        </div>
+                        
+                    </form>
+                </div>
             </div>
         </main>
         <footer>

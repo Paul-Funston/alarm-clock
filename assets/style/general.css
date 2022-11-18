@@ -41,6 +41,13 @@ header {
     background-color: rgb(var(--app-light-bg));
 }
 
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--header-height)
+
+}
 nav a {
     color: rgb(40 40 40);
     text-decoration: none;
@@ -62,7 +69,20 @@ footer {
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 main {
+    background-color: rgb(var(--app-light-bg));
+}
+
+.alarm-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     height: calc(100vh - var(--header-height) - var(--footer-height));
+}
+
+div.form-input {
+    display: flex;
 }
 
 
@@ -72,7 +92,7 @@ main {
 
 
 
-input:not([type=button]) {
+input[type=text] {
     width: 100%;
     height: 48px;
     padding: 0 15px;
@@ -86,7 +106,7 @@ input:not([type=button]) {
     text-align: left;
 }
    
-form input + input {
+form > * + * {
     margin-top: 20px;
 }
 
