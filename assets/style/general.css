@@ -38,38 +38,50 @@ p, h1, h2, h3, h4, h5, h6 {
 
 header {
     height: var(--header-height);
-    background-color: rgb(var(--app-light-bg));
+    background-color: rgb(0 0 0 / 0);
 }
 
 header .container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     height: var(--header-height)
 
 }
+
+nav {
+    text-align: right;
+}
+
 nav a {
     color: rgb(40 40 40);
     text-decoration: none;
 }
-
-
-
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /*  Footer                                                                   */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-footer {
-    height: var(--footer-height);
-    background-color: rgb(var(--app-light-bg));
+footer p {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    font-size: 12px;
+    text-align: right;
+    background-color: rgb(0 0 0 / 0);
 }
+
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /*  Main                                                                     */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-main {
+body {
     background-color: rgb(var(--app-light-bg));
+}
+
+*.alarm {
+    background-color: rgb(var(--app-dark-bg));
+    color: rgb(255 255 255);
 }
 
 .alarm-container {
@@ -78,12 +90,14 @@ main {
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: calc(100vh - var(--header-height) - var(--footer-height));
+    height: calc(100vh - var(--header-height));
 }
 
 div.row {
     min-height: 30px;
 }
+
+
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -115,6 +129,16 @@ div.form-input {
     display: flex;
 }
 
+@media screen and (max-width: 280px) {
+    div.buttons {
+        display: flex;
+        flex-direction: column-reverse;
+        margin-inline: auto;
+        align-items: center;
+        gap: 20px;
+    }
+}
+    
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /*  Button                                                                     */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -137,4 +161,17 @@ button, input[type=button] {
 
 button:hover, input[type=button]:hover {
     background-color: rgb(var(--app-blue-second));
+}
+
+input.alarm-cancel {
+    background-color: rgb(var(--app-blue) / 0.5);
+}
+
+input.alarm-cancel.alarm {
+    background-color: rgb(var(--app-red));
+}
+
+input.alarm-cancel.alarm:hover {
+    background-color: rgb(var(--app-red) / 0.7);
+
 }

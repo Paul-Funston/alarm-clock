@@ -27,9 +27,13 @@ const cancelAlarm = select('.alarm-cancel')
 const currentTime = select('.current-time');
 const displayTimer = select('.display-timer');
 const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]/;
-const userTimeWanted = select('.alarm-time')
+const userTimeWanted = select('.alarm-time');
+const background = select('body');
 
-let now = '';
+
+
+
+let now = {};
 let nowYear = 0;
 let nowMonth = 0;
 let nowDay = 0;
@@ -37,6 +41,7 @@ let nowHour = 0;
 let nowMin = 0;
 let wantedHour = 0;
 let wantedMinute = 0;
+let alarmID = {};
 
 // function on load sets interval
 // function interval runs every second to update time
@@ -47,12 +52,12 @@ function startClock() {
 
 function updateTime() {
     getCurrentTime();
-    currentTime.innerHTML = now.substring(0,8);
+    currentTime.innerHTML = now.toTimeString().substring(0,8);
 }
 
 function getCurrentTime() {
     const date = new Date();
-    now = date.toTimeString();
+    now = date;
     nowYear = date.getFullYear();
     nowMonth = date.getMonth();
     nowDay = date.getDate();
@@ -70,8 +75,8 @@ function setTimer() {
 
     if (timeRegex.test(alarmWanted)) {
         displayAlarm(alarmWanted);
-        let alarmTime = createAlarmDate(alarmWanted);
-        armTimer(alarmTime);
+        let alarmDate = createAlarmDate(alarmWanted);
+        armTimer(alarmDate);
     } else {
         displayTimer.innerText = "please enter a valid time";
     }
@@ -79,6 +84,12 @@ function setTimer() {
 
 function cancelTimer() {
     displayTimer.innerHTML = '';
+    wantedHour = -1;
+    wantedMinute = -1;
+    clearInterval(alarmID);
+    background.classList.remove('alarm');
+    currentTime.classList.remove('alarm');
+    cancelAlarm.classList.remove('alarm');
 }
 
 function displayAlarm(alarmWanted) {
@@ -88,17 +99,27 @@ function displayAlarm(alarmWanted) {
 function createAlarmDate(alarmWanted) {
     wantedHour = parseInt(alarmWanted.slice(0, 2));
     wantedMinute = parseInt(alarmWanted.slice(-2));
-
     const alarm = new Date(nowYear, nowMonth, nowDay, wantedHour, wantedMinute);
-    console.log(alarm);
-    return alarm.toTimeString();
+    return alarm;
 }
 
-function armTimer(alarmTime) {
-    let interval = alarmTime - now;
-    console.log(interval);
+function armTimer(alarmDate) {
+    let interval = alarmDate - now;
+     if (interval >= 0) 
+        setTimeout(playAlarm, (interval - 2000));
 }
 
-function playAlarm(interval) {
+// Audio
+const alarmBeep = new Audio(`./assets/media/audio/electric-piano-2.wav`);
+alarmBeep.type = 'audio/wav';
 
+function playAlarm() {
+    alarmID = setInterval(() => {
+        if (wantedHour === nowHour && wantedMinute === nowMin) {
+            alarmBeep.play();
+            currentTime.classList.toggle('alarm');
+            background.classList.toggle('alarm');
+            cancelAlarm.classList.add('alarm');
+        }
+    }, 2000)
 }
