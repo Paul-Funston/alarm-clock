@@ -106,7 +106,7 @@ function createAlarmDate(alarmWanted) {
 function armTimer(alarmDate) {
     let interval = alarmDate - now;
      if (interval >= 0) 
-        setTimeout(playAlarm, (interval - 2000));
+        setTimeout(playAlarm, (interval - 3000));
 }
 
 // Audio
@@ -121,5 +121,5 @@ function playAlarm() {
             background.classList.toggle('alarm');
             cancelAlarm.classList.add('alarm');
         }
-    }, 2000)
+    }, 1500)
 }
