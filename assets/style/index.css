@@ -95,6 +95,7 @@ div.row {
   min-height: 30px;
   min-width: 240px;
   margin-bottom: 8px;
+  position: relative;
 }
 
 h2.current-time {
@@ -118,6 +119,14 @@ input[type=text], p.display-timer {
   font-size: 17px;
   font-weight: 400;
   line-height: 48px;
+}
+
+p.display-countdown {
+  position: absolute;
+  visibility: hidden;
+  right: 0;
+  top: 0;
+  color: rgb(40 40 40 / 0.5);
 }
 
 .fa-solid {
