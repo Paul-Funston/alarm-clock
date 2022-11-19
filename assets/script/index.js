@@ -65,7 +65,7 @@ function setTimer() {
     let alarmWanted = userTimeWanted.value.trim();
 
     if (timeRegex.test(alarmWanted)) {
-        displayAlarm(alarmWanted);
+        displayAlarm(alarmWanted.substring(0,5));
         let alarmDate = createAlarmDate(alarmWanted);
         armTimer(alarmDate);
     } else {
@@ -90,8 +90,12 @@ function displayAlarm(alarmWanted) {
 
 function createAlarmDate(alarmWanted) {
     wantedHour = parseInt(alarmWanted.slice(0, 2));
-    wantedMinute = parseInt(alarmWanted.slice(-2));
+    wantedMinute = parseInt(alarmWanted.slice(3, 5));
+
     const alarm = new Date(nowYear, nowMonth, nowDay, wantedHour, wantedMinute);
+    if (wantedHour < nowHour || wantedHour === nowHour && wantedMinute < nowMin) {
+        alarm.setDate(alarm.getDate() + 1);
+    }
     return alarm;
 }
 
